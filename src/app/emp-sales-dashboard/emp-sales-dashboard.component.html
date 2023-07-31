@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <div class="spacer30"></div>
+    <div class="custom_container">
+        <div class="theme_box">
+            <div class="boxs color2">
+                <div class="color_title2">
+                    Target
+                </div>
+                <div class="boxs-pad">
+                    {{lblTargetVal}}
+                </div>
+            </div>
+            <div class="boxs color3">
+                <div class="color_title3">
+                    Primary Sales
+                </div>
+                <div class="boxs-pad">                        
+                    {{lblPrimarySalesVal}}
+                </div>
+            </div>
+            <div class="boxs color4">
+                <div class="color_title4">
+                    Secondary Sales
+                </div>
+                <div class="boxs-pad">
+                    {{lblSecondarySalesVal}}
+                </div>
+            </div>
+            <div class="boxs color5">
+                <div class="color_title5">
+                    % Prim Achievement
+                </div>
+                <div class="boxs-pad">
+                    {{lblPrimAchievementval}}
+                </div>
+            </div>
+            <div class="boxs color6">
+                <div class="color_title6">
+                    YPM (INR '000)
+                </div>
+                <div class="boxs-pad">
+                    {{lblYPM}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="custom_container mb25">
+        <div class="themebox">
+            <div class="w50 fl wedget_title">
+                <p>{{varDesignationName}} wise Target Vs Prim Vs Sec</p>
+            </div>
+            <div class="w50 fl pob-text text-md-right text-sm-right text-xs-left">
+                <span>
+                    <div *ngIf="isShowBack">
+                        <!-- <a routerLink="emp-sales-dashboard" (click)="BackSales()" routerLinkActive="active">BackNew</a> -->
+                        <a [routerLink]="empsalesdashboard" (click)="BackSales()" class="btn btn-link">Back</a>
+                    </div>
+                </span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="worko-tabs">
+                <dx-chart #chartTarget_Prim_Sec_Sales id="chartTarget_Prim_Sec_Sales"
+                    (onPointClick)="onPatchPointClick_Target_Prim_Sec_Sales($event)" [class]="'pointer-on-bars'"
+                    [dataSource]="Target_Prim_Sec_Sales" [rotated]="true" (onLegendClick)="chart_onLegendClick($event)"
+                    (onDrawn)="Chart_Click($event)">
+                    <dxo-loading-indicator [show]="true">
+                        <dxo-font [size]="25"></dxo-font>
+                    </dxo-loading-indicator>
+                    <dxo-title text="{{varDesignationName}} wise">
+                        <dxo-font [size]="25" [weight]="600"></dxo-font>
+                    </dxo-title>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                    <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                        <dxo-grid [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxi-value-axis>
+                    <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                        <dxo-label [customizeHint]="customizeHint" wordWrap="normal" overlappingBehavior="stagger"
+                            [customizeText]="customizeText">
+                        </dxo-label>
+                    </dxo-argument-axis>
+                    <dxo-common-series-settings argumentField="varEmpName" type="bar" hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                         color:'#000000',
+                         size:'11'
+                        }" [format]="{ 
+                        type: 'fixedPoint',
+                        precision: '0'
+                    }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+                    <dxi-series argumentField="varEmpName" valueField="decSecondary" name="Sum of Secondary" type="bar"
+                        color="#A5A5A5">
+                    </dxi-series>
+                    <dxi-series argumentField="varEmpName" valueField="decPrimary" name="Sum of Primary" type="bar"
+                        color="#ED7D31">
+                    </dxi-series>
+                    <dxi-series argumentField="varEmpName" valueField="decTarget" name="Sum of Target" type="bar"
+                        color="#5B9BD5">
+                    </dxi-series>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                    </dxo-legend>
+                </dx-chart>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="custom_container mb25">
+        <div class="themebox">
+            <div class="w50 fl wedget_title">
+                <p>Stockist wise</p>
+            </div>
+            <div class="w50 fl pob-text text-md-right text-sm-right text-xs-left">
+                <form>
+                    <mat-radio-group (change)="onItemChanged($event)" aria-label="Select an option">
+                        <mat-radio-button [checked]="true" value="0">TOP 5</mat-radio-button>
+                        <mat-radio-button value="1">Bottom 5</mat-radio-button>
+                    </mat-radio-group> &nbsp;
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="worko-tabs">
+                <ng-container *ngIf="iSShowTop5">
+                    <dx-chart #chartStokistWiseSalesTop5 id="chartStokistWiseSalesTop5"
+                        (onPointClick)="onPatchPointClick_Stockist_Sales($event)" [class]="'pointer-on-bars'"
+                        [dataSource]="Stokist_WiseSalesDataSourceTop5" (onLegendClick)="chart_onLegendClick($event)"
+                        (onDrawn)="Chart_Click($event)">
+                        <dxo-loading-indicator [show]="true">
+                            <dxo-font [size]="25"></dxo-font>
+                        </dxo-loading-indicator>
+                        <dxo-title text="Stockist wise">
+                            <dxo-font [size]="25" [weight]="600"></dxo-font>
+                        </dxo-title>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                        <dxi-value-axis [maxValueMargin]="0.1" [allowDecimals]="false">
+                            <dxo-grid [width]="0.3" [opacity]="1">
+                            </dxo-grid>
+                        </dxi-value-axis>
+                        <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                            <dxo-label [customizeHint]="customizeHint" wordWrap="normal" overlappingBehavior="stagger"
+                                [customizeText]="customizeText_Stockist">
+                            </dxo-label>
+                        </dxo-argument-axis>
+                        <dxo-common-series-settings argumentField="varChannelName" type="bar"
+                            hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                            <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                             color:'#000000',
+                             size:'11'
+                            }" [format]="{ 
+                            type: 'fixedPoint',                             
+                            precision: '0'
+                        }">
+                            </dxo-label>
+                        </dxo-common-series-settings>
+                        <dxi-series argumentField="varChannelName" valueField="decPrimary" name="Sum of Primary"
+                            type="bar" color="#ED7D31">
+                        </dxi-series>
+                        <dxi-series argumentField="varChannelName" valueField="decSecondary" name="Sum of Secondary"
+                            type="bar" color="#FFC000">
+                        </dxi-series>
+                        <dxi-series argumentField="varChannelName" valueField="decClosing" name="Sum of Closing"
+                            type="bar" color="#70AD47">
+                        </dxi-series>
+                        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                        </dxo-legend>
+                    </dx-chart>
+                </ng-container>
+
+                <ng-container *ngIf="iSShowBottom5">
+                    <dx-chart #chartStokistWiseSalesBottom5 id="chartStokistWiseSalesBottom5"
+                        (onPointClick)="onPatchPointClick_Stockist_Sales($event)" [class]="'pointer-on-bars'"
+                        [dataSource]="Stokist_WiseSalesDataSourceBottom5" (onLegendClick)="chart_onLegendClick($event)"
+                        (onDrawn)="Chart_Click($event)">
+                        <dxo-loading-indicator [show]="true">
+                            <dxo-font [size]="25"></dxo-font>
+                        </dxo-loading-indicator>
+                        <dxo-title text="Stockist wise">
+                            <dxo-font [size]="25" [weight]="600"></dxo-font>
+                        </dxo-title>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip">
+                        </dxo-tooltip>
+                        <dxi-value-axis [maxValueMargin]="0.1" [allowDecimals]="false">
+                            <dxo-grid [width]="0.3" [opacity]="1">
+                            </dxo-grid>
+                        </dxi-value-axis>
+                        <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                            <dxo-label [customizeHint]="customizeHint" wordWrap="normal" overlappingBehavior="stagger"
+                                [customizeText]="customizeText_Stockist">
+                            </dxo-label>
+                        </dxo-argument-axis>
+                        <dxo-common-series-settings argumentField="varChannelName" type="bar"
+                            hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                            <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                             color:'#000000',
+                             size:'11'
+                            }" [format]="{ 
+                            type: 'fixedPoint',
+                            precision: '0'
+                        }">
+                            </dxo-label>
+                        </dxo-common-series-settings>
+                        <dxi-series argumentField="varChannelName" valueField="decPrimary" name="Sum of Primary"
+                            type="bar" color="#ED7D31">
+                        </dxi-series>
+                        <dxi-series argumentField="varChannelName" valueField="decSecondary" name="Sum of Secondary"
+                            type="bar" color="#FFC000">
+                        </dxi-series>
+                        <dxi-series argumentField="varChannelName" valueField="decClosing" name="Sum of Closing"
+                            type="bar" color="#70AD47">
+                        </dxi-series>
+                        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                        </dxo-legend>
+                    </dx-chart>
+                </ng-container>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="custom_container mb25">
+        <div class="themebox">
+            <div class="w50 fl wedget_title">
+                <p>Product wise</p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="worko-tabs">
+                <dx-chart #chartProductSales id="chartProductSales" [class]="'pointer-on-bars'"
+                    [dataSource]="Product_WiseSalesDataSource" (onLegendClick)="chart_onLegendClick($event)">
+                    <dxo-loading-indicator [show]="true">
+                        <dxo-font [size]="25"></dxo-font>
+                    </dxo-loading-indicator>
+                    <dxo-title text="Product wise">
+                        <dxo-font [size]="25" [weight]="600"></dxo-font>
+                    </dxo-title>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                    <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                        <dxo-grid [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxi-value-axis>
+                    <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                        <dxo-label [customizeHint]="customizeHint" wordWrap="normal" overlappingBehavior="stagger"
+                            [customizeText]="customizeText">
+                        </dxo-label>
+                    </dxo-argument-axis>
+                    <dxo-common-series-settings argumentField="varProductName" type="bar" hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                             color:'#000000',
+                             size:'11'
+                            }" [format]="{ 
+                            type: 'fixedPoint',
+                            precision: '0'
+                        }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+                    <dxi-series argumentField="varProductName" valueField="decPrimary" name="Sum of Primary" type="bar"
+                        color="#ED7D31">
+                    </dxi-series>
+                    <dxi-series argumentField="varProductName" valueField="decSecondary" name="Sum of Secondary"
+                        type="bar" color="#FFC000">
+                    </dxi-series>
+                    <dxi-series argumentField="varProductName" valueField="decClosing" name="Sum of Closing" type="bar"
+                        color="#70AD47">
+                    </dxi-series>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                    </dxo-legend>
+                </dx-chart>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</body>
+
+</html>

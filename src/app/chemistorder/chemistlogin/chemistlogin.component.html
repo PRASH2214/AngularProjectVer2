@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <!--<link href="../../../assets/chemist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../../../assets/chemist/css/custom.css" rel="stylesheet" />-->
+
+  <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">-->
+  <title></title>
+</head>
+<body style="background-color:#F5F5F5;min-height:110vh;">
+  <div class="header">
+    <div class="curve-header">
+      <img src="assets/chemist/images/ecubix.svg" alt="" />
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <div class="top-picture">
+          <img src="assets/chemist/images/top-picture.svg" />
+        </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <h3 class="mb-4">Smart Order</h3>
+      </div>
+    </div>
+    <form [formGroup]="ChemistloginForm">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="form-group">
+            <input type="text" formControlName="ChemistMobileno" class="form-control registerdno" name="ChemistMobileno" placeholder="Registered Mobile No." (keypress)="keyPress($event)" maxlength="10" autocomplete="off" (paste)="false" inputmode="tel"
+                   [ngClass]="{ 'is-invalid': submitted && f.ChemistMobileno.errors }" />
+            <div *ngIf="submitted && f.ChemistMobileno.errors" class="invalid-feedback" style="font-size: 15px;">
+              <div *ngIf="f.ChemistMobileno.errors.required">Registered mobile no is required.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 text-center">
+          <button [disabled]="loading" class="btn btn-block otp" (click)="GET_OTP()">GET OTP</button>
+          <img *ngIf="loading"
+               src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+      </div>
+    </form>
+  </div>
+  <ng4-loading-spinner> </ng4-loading-spinner>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!--<script src="../../../assets/chemist/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="../../../assets/chemist/js/popper.min.js"></script>
+  <script src="../../../assets/chemist/js/bootstrap.min.js"></script>-->
+</body>
+</html>

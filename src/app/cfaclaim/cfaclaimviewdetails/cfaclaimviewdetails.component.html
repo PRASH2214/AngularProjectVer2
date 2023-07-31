@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cfa_upload_file</title>
+  <link rel="icon" href="assets/cfaclaim/images/eris-logo.png" type="image/png">
+</head>
+<body>
+  <div class="label_alignment">
+    <img class="img-responsive main-logo" src="assets/cfaclaim/images/eris logo copy.svg" alt="eris" width="140" height="220">
+  </div>
+  <div class="box_main1">
+    <form class="form-inline" method="post" enctype="multipart/form-data">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12 upload_title">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="email">{{varStockistNameDyn}} Name<span style="color: red">*</span></label>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varStockistName}}</label>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="row">
+                <div class="col-md-6"><label for="email">Pre Claim No.<span style="color: red">*</span></label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varPreClaimNo}}</label>
+                  </div>
+                </div>
+              </div>-->
+              <div class="row">
+                <div class="col-md-6"><label for="email">{{varStockistNameDyn}} Ref. No.</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varStockistRefno}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="email">Claim Register Name</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varClaimRegisterName}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><label for="email">Claim Date</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varClaimDate}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"> <label for="email">Amount</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varDocumentAmount}}</label>
+                  </div>
+                </div>
+              </div>
+              <!--<div class="row">
+                <div class="col-md-6"><label for="email">Final Amount</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varFinalAmount}}</label>
+                  </div>
+                </div>
+              </div>-->
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <!--<div class="row">
+                <div class="col-md-6"><label for="pre_Claim_date">Pre Claim Date</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varPreClaimDate}}</label>
+                  </div>
+                </div>
+              </div>-->
+              <div class="row">
+                <div class="col-md-6"><label for="email">{{varStockistNameDyn}} Ref. Date</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varStockistRefDate}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><label for="Doc_no">Claim Doc No.</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varClaimDocNo}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><label for="Reason">Reason</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varReason}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><label for="email">Return Type</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varReturnType}}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6"><label for="email">Invalid Remarks</label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <label for="email">{{varRemarks}}</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container" style="padding-top:10px;">
+            <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-6 upload_title">
+                <div class="col-md-6"><label for="email">Upload<span style="color: red">*</span></label></div>
+                <div class="col-md-6">
+                  <div class="form-group margin-b">
+                    <input type="file" #myInput (change)="handleFileInput($event)" [disabled]="ClaimStatus">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="col-md-6" style="font-size: 14px;font-weight: bold;"><a href="{{varFileDownloadPath}}" target="_blank">{{varFileName}}</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <p class="alt_note" style="padding-left: 18px;">Note: JPEG, JPG, PNG & PDF formats Supported upto maximum 10 MB size.</p>
+                <div class="clearfix"></div>
+                <div class="cansel_btn">
+                  <button type="button" class="btn btn-primary" style="padding-left: 15px;" (click)="Back()">BACK</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
+<ng4-loading-spinner> </ng4-loading-spinner>

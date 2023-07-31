@@ -1,0 +1,124 @@
+/* -----------------> can start accordion style copy from here ------------------------*/
+
+.accordion-started.accordion-bral {
+    width: 100%;
+    margin: 0px !important;
+    color: #484848;
+}
+
+    .accordion-started.accordion-bral img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .accordion-started.accordion-bral .ac-label {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 500;
+        padding: 4px 12px;
+        position: relative;
+        display: block;
+        height: auto;
+        cursor: pointer;
+        color: #252525;
+        background-color: #e7f6fa;
+        border: 1px solid #92d0f1;
+        border-radius: 4px;
+        line-height: 33px;
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 10px;
+        -webkit-box-shadow: 0 .4rem 0.4rem rgba(0,0,0,.15);
+        -moz-box-shadow: 0 .4rem 0.4rem rgba(0,0,0,.15);
+        box-shadow: 0 .4rem 0.4rem rgba(0,0,0,.15);
+    }
+
+        .accordion-started.accordion-bral .ac-label:hover {
+        }
+
+    .accordion-started.accordion-bral input + .ac-label {
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .accordion-started.accordion-bral input:checked + .ac-label,
+    .accordion-started.accordion-bral input:checked + .ac-label:active {
+    }
+
+    .accordion-started.accordion-bral input.ac-input {
+        display: none;
+    }
+
+    .accordion-started.accordion-bral .article {
+        overflow: hidden;
+        height: 0px;
+        max-height: auto;
+
+    }
+
+        .accordion-started.accordion-bral .article p {
+            line-height: 23px;
+            padding-left: 5px;
+        }
+
+    .accordion-started.accordion-bral input:checked ~ .article i {
+        -webkit-transition: all 0.5s ease-in-out;
+        -moz-transition: all 0.5s ease-in-out;
+        -o-transition: all 0.5s ease-in-out;
+        -ms-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .accordion-started.accordion-bral input:checked ~ .article.ac-content {
+        height: auto;
+        background-color: #FFF;
+        margin-top:-15px;
+        margin-bottom: 15px;
+        padding: 20px 0px 10px 0px;
+        font-size: 14px;
+        -webkit-box-shadow: 0 .5rem 0.5rem rgba(0,0,0,.15);
+        -moz-box-shadow: 0 .5rem 0.5rem rgba(0,0,0,.15);
+        box-shadow: 0 .5rem 0.5rem rgba(0,0,0,.15);
+        border-radius:5px;
+    }
+
+    .accordion-started.accordion-bral i {
+        position: absolute;
+        transform: translate(-20px, 0);
+        margin-top: 12px;
+        right: 0;
+    }
+
+    .accordion-started.accordion-bral input:checked ~ .ac-label i:before {
+        transform: translate(2px, 0) rotate(-45deg);
+    }
+
+    .accordion-started.accordion-bral input:checked ~ .ac-label i:after {
+        transform: translate(-4px, 0) rotate(45deg);
+    }
+
+    .accordion-started.accordion-bral i:before, .accordion-bral i:after {
+        content: "";
+        position: absolute;
+        background-color: #4a4a4a;
+        width: 2px;
+        height: 9px;
+    }
+
+    .accordion-started.accordion-bral i:before {
+        transform: translate(-4px, 0) rotate(-45deg);
+    }
+
+    .accordion-started.accordion-bral i:after {
+        transform: translate(2px, 0) rotate(45deg);
+    }
+
+.accordion-started ul.ac-list {
+    padding-left: 40px;
+    list-style-type: disc;
+}
+
+
+/* ---------- accordion style end --------------------------------------- */

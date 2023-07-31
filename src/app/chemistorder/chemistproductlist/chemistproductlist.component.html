@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <title></title>
+   
+</head>
+<body style="background-color:#F5F5F5;min-height:100vh;">
+  <div class="header">
+    <div class="flat-header">
+      <a href="javascript:void(0)" (click)="BackClick()" class="back"><</a>
+      <img src="assets/chemist/images/ecubix.svg" alt="" />
+    </div>
+  </div>
+  <div class="subtitle">
+    <div>Product List</div>
+    <div>
+      <a routerLink="/productlist" class="fix-next-ProductNextbtn" (click)="ClickNext()"> Next <img src="assets/chemist/images/right-arrow.png" alt="arrow" /></a>
+      <img *ngIf="loading"
+           src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+  </div>
+
+  <div class="acc-menu">
+    <div class="accordion-started accordion-bral row">
+      <div class="col-sm-12 col-md-12 col-lg-12">
+        <mat-accordion class="example-headers-align">
+          <mat-expansion-panel *ngFor="let Division of DivisionList;let i=index">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{Division.varDivisionName}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="table-responsive" style="height:300px; overflow:auto;">
+              <form #ProductListform="ngForm" name="ngForm" novalidate>
+                <table class="table custom-table">
+                  <thead>
+                    <tr>
+                      <th hidden="hidden">fk_DivisionGlCode</th>
+                      <th hidden="hidden">Product Id</th>
+                      <th>Product Name</th>
+                      <th width="100" class="text-center">Discount</th>
+                      <th width="100" class="text-center">#Qty</th>
+                      <th width="100" class="text-center">#Free Qty</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let Product of ProductList | OrderBy:'varProductName'">
+                      <ng-container *ngIf="Product.varDivisionName == [Division.varDivisionName]">
+                        <td hidden="hidden">{{Product.fk_DivisionGlCode}}</td>
+                        <td hidden="hidden">{{Product.fk_ProductGlCode}}</td>
+                        <td>{{Product.varProductName}}</td>
+                        <td class="text-center">
+                          <input type="text" name="{{Product.fk_ProductGlCode}}_dis" value={{Product.intDiscount}} class="form-control form-control-sm inputtable" readonly style="width: 110%" />
+                        </td>
+                        <td class="text-center">
+                          <input type="text" (keypress)="ValidateText($event.target,Product);keyPress($event);" (focusout)="CalculateFreeQty($event.target,Product)" (keyup)="ValidateText($event.target,Product)" (change)="ValidateText($event.target,Product)" (paste)="false" (drop)="false" class="form-control form-control-sm inputtable" [(ngModel)]="Product.Qty" name="{{Product.fk_ProductGlCode}}_text" #txt="ngModel" maxlength="5" autocomplete="off" inputmode="tel" required="required" style="width: 110%" />
+                          <!--<input type="text" class="form-control form-control-sm inputtable" [(ngModel)]="Product.Qty" name="{{Product.fk_ProductGlCode}}_text" #txt="ngModel" (keypress)="keyPress($event)" maxlength="5" autocomplete="off" inputmode="tel" (paste)="false" required="required" style="width: 110% !important" />-->
+                        </td>
+                        <td class="text-center">
+                          <input type="text"  [(ngModel)]="Product.intFreeQty" name="{{Product.fk_ProductGlCode}}_freeQty" #txt="ngModel"  class="form-control form-control-sm inputtable" readonly style="width: 110%" />
+                        </td>
+                      </ng-container>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+
+
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+  </div>
+  <!--<div>
+    <a routerLink="/chemistorder/Chemistproductlist" class="fix-next-btn" (click)="ClickNext()"> Next <img src="assets/chemist/images/right-arrow.png" alt="arrow" /></a>
+    <img *ngIf="loading"
+         src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  </div>-->
+  <ng4-loading-spinner> </ng4-loading-spinner>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!--<script src="../../../assets/chemist/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="../../../assets/chemist/js/popper.min.js"></script>
+  <script src="../../../assets/chemist/js/bootstrap.min.js"></script>-->
+  <!--<script src="/eCubixWeb/node_modules/js/accordion.js"></script>-->
+  <!--<script src="/assets/chemist/js/accordion.js"></script>-->
+
+</body>
+</html>

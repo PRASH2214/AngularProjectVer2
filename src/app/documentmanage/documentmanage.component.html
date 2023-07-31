@@ -1,0 +1,32 @@
+<ng4-loading-spinner> </ng4-loading-spinner>
+<div class="headertitleSub">
+  <!-- <div class="text-left">
+    <a class="back_arrow">
+      <span class="glyphicon glyphicon-chevron-left">
+      </span>
+    </a>
+  </div> -->
+  <div class="text-center page_title">
+    <h3>Documents</h3>
+  </div>
+</div>
+<div class="TDC_sessionplan_main">
+  <div class="col-md-12 grouping-form">
+    <dx-tree-view id="simple-treeview" [width]="300" [dataSource]="products" dataStructure="plain" parentIdExpr="parentId" keyExpr="id" displayExpr="text"
+                  (onItemClick)="selectItem($event)"></dx-tree-view>
+  </div>
+  <dx-popup class="success_message" [width]="400" height="auto" [showTitle]="false" [dragEnabled]="false" [closeOnOutsideClick]="true"
+            [(visible)]="isPopupAlertVisible">
+    <div *dxTemplate="let data of 'content'">
+      <div class="header_top">
+        <div class="p_title">ECP</div>
+        <div class="p_message">
+          <span>{{AlertMessage}}</span>
+        </div>
+      </div>
+      <div class="suc_save_btn delete_message">
+        <a class="ok" href="javascript:void(0);" (click)="btnOK();">OK</a>
+      </div>
+    </div>
+  </dx-popup>
+</div>

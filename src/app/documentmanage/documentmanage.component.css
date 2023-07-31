@@ -1,0 +1,526 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.example-tree-invisible {
+  display: none;
+}
+
+.example-tree ul,
+.example-tree li {
+  margin-top: 0;
+  margin-bottom: 0;
+  list-style-type: none;
+}
+
+.dx-texteditor .dx-texteditor-input {
+  background: none;
+  color: white;
+  font-size: 15px;
+  padding: 0 0 0 0px;
+  height: 25px;
+  line-height: normal;
+  min-height: auto;
+  cursor: pointer;
+}
+
+.dx-texteditor {
+  background: none;
+  border: none;
+  height: auto !important;
+  position: static;
+  height: 25px !important;
+  padding-left: 0;
+  width: auto !important;
+  z-index: 9999;
+}
+
+.header_top {
+  background: #305990;
+  padding: 30px 0;
+  text-align: center;
+}
+
+  .header_top .p_title {
+    font-size: 25px;
+    padding: 5px 0;
+    color: white;
+  }
+
+  .header_top .p_message {
+    font-size: 16px;
+    color: white;
+  }
+
+.suc_save_btn {
+  background: #1E395D;
+  padding: 0;
+  text-align: center;
+}
+
+  .suc_save_btn a {
+    padding: 30px 0;
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+  }
+
+    .suc_save_btn a.ok {
+      width: 50%;
+      display: inline-block;
+      padding: 15px 0;
+    }
+
+    .suc_save_btn a.cancel {
+      width: 50%;
+      display: inline-block;
+      padding: 15px 0;
+      float: left;
+      border-right: solid 1px #999;
+    }
+
+body {
+  background-color: white !important;
+}
+
+.date_picker_header {
+  display: inline-block;
+  width: auto;
+  float: right;
+  position: static;
+}
+
+.headertitle {
+  background-color: #FFFFFF;
+  font-size: 14px;
+  font-weight: bold;
+  color: #275791;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  position: fixed;
+  width: 90%;
+  top: 0;
+  z-index: 999;
+  box-shadow: 0 0 10px #999;
+}
+
+.headertitleSub {
+  background-color: #018CD1;
+  color: #FFFFFF;
+  font-weight: bold;
+  padding: 10px 0px;
+  display: inline-block;
+  width: 100%;
+  margin-top: 0;
+  position: fixed;
+  top: 0;
+  z-index: 99;
+  left: 0;
+}
+
+.containercorpview {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.corpviewheader {
+  color: black;
+  text-align: center;
+  padding: 0px;
+}
+
+.corpviewDefVal {
+  color: white;
+  text-align: center;
+  background-color: #018CD1;
+  vertical-align: central;
+  font-weight: bold;
+  padding: 5px;
+  height: 30px;
+}
+
+.corpviewvalue {
+  text-align: center;
+}
+
+.dx-calendar {
+  width: 100% !important;
+}
+/*Month Picker*/
+.dx-dateviewroller-day {
+  display: none !important;
+}
+
+.dx-texteditor-input {
+  padding-right: 0px !important;
+}
+
+.dx-dropdowneditor-icon {
+  display: none;
+}
+
+/*--Start-Pramod--24-01-18--*/
+
+.headertitle span {
+  font-weight: normal;
+  font-size: 20px;
+  padding: 10px 0;
+  display: inline-block;
+}
+
+.headertitleSub span {
+  display: inline-block;
+  padding: 0;
+  float: left;
+  font-size: 25px;
+}
+
+.headertitleSub img {
+  float: left;
+  width: auto;
+}
+
+/*--End-Pramod--24-01-18--*/
+/*--Start-Pramod--25-01-18--*/
+
+
+.timezone_main {
+  width: 100%;
+  text-align: right;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding-right: 2px;
+}
+
+  .timezone_main .timezone_evening {
+    display: inline-block;
+    width: auto;
+    margin-left: 20px;
+    position: relative;
+  }
+
+  .timezone_main .timezone_morning {
+    width: auto;
+    display: inline-block;
+    position: relative;
+  }
+
+    .timezone_main .timezone_morning:after {
+      display: inline-block;
+      background: #ccff99;
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      content: "";
+      left: -15px;
+      top: 5px;
+    }
+
+  .timezone_main .timezone_evening:after {
+    display: inline-block;
+    background: #70944d;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    content: "";
+    left: -15px;
+    top: 5px;
+  }
+
+
+
+/*--End-Pramod--25-01-18--*/
+
+/*Calendar Color*/
+#calendar-container {
+  margin: auto;
+}
+
+.dx-calendar-cell:not(.dx-calendar-other-month) .weekend,
+.dx-calendar-cell:not(.dx-calendar-other-month) .holyday {
+  text-shadow: none;
+  font-weight: bold;
+}
+
+.dx-calendar-cell:not(.dx-calendar-other-month) .weekend {
+  color: #3030FF;
+}
+
+.dx-state-disabled.dx-calendar .dx-calendar-cell:not(.dx-calendar-other-month) .weekend {
+  color: #8080FF;
+}
+
+.dx-calendar-cell:not(.dx-calendar-other-month) .holyday {
+  color: #FF3030;
+}
+
+.dx-state-disabled.dx-calendar .dx-calendar-cell:not(.dx-calendar-other-month) .holyday {
+  color: #FF8080;
+}
+
+.dx-calendar-cell-disabled {
+  background-color: #DCDCDC !important;
+}
+
+.dotMorning {
+  height: 7px;
+  width: 7px;
+  background-color: #CCFF99;
+  display: inline-block;
+}
+
+.dotEvening {
+  height: 7px;
+  width: 7px;
+  background-color: #70944D;
+  display: inline-block;
+}
+
+/*Calendar Color Ends*/
+
+
+
+.dx-calendar-navigator .dx-calendar-navigator-previous-month, .dx-calendar-navigator .dx-calendar-navigator-next-month {
+  display: none !important;
+}
+
+.dx-calendar-view-month .dx-calendar-navigator .dx-calendar-caption-button {
+  right: 0;
+  left: 0;
+  cursor: inherit;
+}
+
+  .dx-calendar-view-month .dx-calendar-navigator .dx-calendar-caption-button:hover {
+    background: transparent;
+    outline: none;
+    box-shadow: none;
+  }
+
+.TDC_sessionplan_main {
+  display: inline-block;
+  width: 100%;
+  margin-top: 50px;
+}
+
+  .TDC_sessionplan_main .dx-calendar {
+    min-height: 320px;
+    height: auto;
+  }
+
+.dx-calendar-body table .dx-calendar-cell {
+  border: solid 1px #FAEDFA;
+}
+
+.TDC_sessionplan_main table tr .dx-calendar-empty-cell {
+  opacity: 0;
+}
+
+.dx-calendar-body table tr .dx-calendar-selected-date {
+  border-radius: 0;
+}
+/*success-message-popup--start*/
+
+.dx-overlay-content.dx-popup-normal.dx-popup-draggable {
+  height: auto !important;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+}
+
+.dx-overlay-content .dx-popup-content {
+  padding: 0;
+  height: auto !important;
+}
+
+  .dx-overlay-content .dx-popup-content .header_top {
+    background: #305990;
+    padding: 30px 0;
+    text-align: center;
+  }
+
+  .dx-overlay-content .dx-popup-content .suc_save_btn {
+    background: #1E395D;
+    padding: 0;
+    text-align: center;
+  }
+
+    .dx-overlay-content .dx-popup-content .suc_save_btn a {
+      padding: 30px 0;
+      display: inline-block;
+      width: 100%;
+    }
+
+  .dx-overlay-content .dx-popup-content .header_top .p_title {
+    font-size: 25px;
+    padding: 5px 0;
+    color: white;
+  }
+
+  .dx-overlay-content .dx-popup-content .header_top .p_message {
+    font-size: 16px;
+    color: white;
+  }
+
+  .dx-overlay-content .dx-popup-content .suc_save_btn a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+  }
+
+.delete_message {
+  padding: 0 !important;
+  display: inline-block;
+  width: 100%;
+}
+
+  .delete_message .ok {
+    width: 50%;
+    display: inline-block;
+    padding: 15px 0;
+  }
+
+  .delete_message .cancel {
+    width: 50%;
+    display: inline-block;
+    padding: 15px 0;
+    float: left;
+    border-right: solid 1px #999;
+  }
+
+.dx-overlay-content.dx-popup-normal.dx-resizable {
+  height: auto !important;
+}
+
+.TDC_sessionplan_date {
+  display: inline-block;
+  width: 100%;
+  border: solid 1px #ddd;
+  padding: 20px 0;
+  margin-top: 10px;
+}
+
+.month_cal_main {
+  border: solid 1px #ddd;
+  padding: 12px 10px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.headertitleSub .back_arrow {
+  color: white;
+}
+
+.headertitleSub .page_title h3 {
+  margin: 0;
+  font-size: 18px;
+  padding-top: 3px;
+}
+
+
+.download {
+  width: 150px;
+  text-align: center !important;
+  cursor: pointer;
+}
+
+.example-month-picker .mat-calendar-period-button {
+  pointer-events: none;
+}
+
+.example-month-picker .mat-calendar-arrow {
+  display: none;
+}
+
+::ng-deep .widget-container {
+  margin-right: 320px;
+}
+
+::ng-deep #calendar-container {
+  margin: auto;
+}
+
+::ng-deep .dx-calendar-cell:not(.dx-calendar-other-month) .weekend,
+::ng-deep .dx-calendar-cell:not(.dx-calendar-other-month) .holyday {
+  text-shadow: none;
+  font-weight: bold;
+}
+
+::ng-deep .dx-calendar-cell:not(.dx-calendar-other-month) .weekend {
+  color: #3030FF;
+}
+
+::ng-deep .dx-state-disabled.dx-calendar .dx-calendar-cell:not(.dx-calendar-other-month) .weekend {
+  color: #8080FF;
+}
+
+::ng-deep .dx-calendar-cell:not(.dx-calendar-other-month) .holyday {
+  color: #FF3030;
+}
+
+::ng-deep .dx-state-disabled.dx-calendar .dx-calendar-cell:not(.dx-calendar-other-month) .holyday {
+  color: #FF8080;
+}
+
+::ng-deep .options {
+  padding: 20px;
+  background-color: rgba(191, 191, 191, 0.15);
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 260px;
+}
+
+::ng-deep .caption {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+::ng-deep .option {
+  margin-top: 10px;
+}
+
+.dx-calendar[_ngcontent-c1] {
+  width: 100% !important;
+  height: 380px !important;
+}
+
+::ng-deep #simple-treeview, #product-details {
+  display: inline-block;
+}
+
+::ng-deep #product-details {
+  vertical-align: top;
+  width: 400px;
+  height: 420px;
+  margin-left: 20px;
+}
+
+  ::ng-deep #product-details > img {
+    border: none;
+    height: 300px;
+    width: 400px;
+  }
+
+  ::ng-deep #product-details > .name {
+    text-align: center;
+    font-size: 20px;
+  }
+
+  ::ng-deep #product-details > .price {
+    text-align: center;
+    font-size: 24px;
+  }
+
+::ng-deep .dark #product-details > div {
+  color: #f0f0f0;
+}
+
+::ng-deep .hidden {
+  visibility: hidden;
+}

@@ -1,0 +1,22 @@
+/* swipe-to-delete-item.component.css */
+.list-item {
+    position: relative;
+    /* Add other styles for your list items */
+  }
+  
+  .delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    display: none;
+  }
+  
+  .swipe-active .delete-button {
+    display: block;
+  }

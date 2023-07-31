@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CFA</title>
+  <link rel="icon" href="assets/cfaclaim/images/eris-logo.png" type="image/png">  
+</head>
+<body class="otp_bg">
+  <div class="label_alignment">
+    <img class="img-responsive main-logo" src="assets/cfaclaim/images/eris logo copy.svg" alt="Chania" width="140" height="220">
+  </div>
+  <form [formGroup]="CFAClaimLoginOTP">
+    <div class="row">
+      <!--<div class="col-sm-3 col-md-3 col-lg-3"></div>-->
+      <div class="col-sm-6 col-md-6 col-lg-6 form_alignment">
+
+        <div class="imgcontainer">
+          <img class="img-responsive main-logo" src="assets/cfaclaim/images/avtar.png" alt="cfa" width="345" height="200">
+        </div>
+        <div class="text-center">
+          <h3>CFA Claim</h3>
+        </div>
+
+        <div class="login-form">          
+          <input type="text" formControlName="CFAClaimOTP" class="line-focus otp_text" placeholder="Enter OTP." (keypress)="keyPress($event)" maxlength="5" autocomplete="off" inputmode="tel"
+                 [ngClass]="{ 'is-invalid': submitted && f.CFAClaimOTP.errors }" />
+          <div *ngIf="submitted && f.CFAClaimOTP.errors" class="invalid-feedback" style="font-size: 15px;">
+            <div *ngIf="f.CFAClaimOTP.errors.required">OTP is required.</div>
+          </div>
+
+          <div class="">            
+            <button [disabled]="loading" class="btn btn-primary otp-button" (click)="ValidateOTP()" style="padding: 14px;font-size: 14px;font-weight: 600;">SUBMIT</button>
+          </div>
+        </div>
+        <div class="resend_button">          
+          <span *ngIf="showResend"> <a routerLink="/otp" (click)="ReSendOTP()">Resend OTP</a></span>
+          <span *ngIf="showTimer"><a href="javascript:void(0)" type="button" style="float: right;">Remaining time - 00:{{timeLeft}}s</a></span>
+        </div>
+      </div>
+    </div>
+    </form>
+</body>
+</html>
+<ng4-loading-spinner> </ng4-loading-spinner>

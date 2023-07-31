@@ -1,0 +1,73 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+.dx-popup-content {
+  padding: 0 !important;
+}
+
+.dx-popup-title {
+  color: #FFFFFF;
+  background-color: #018CD1;
+}
+
+  .dx-popup-title .dx-closebutton {
+    width: 35px;
+    height: 35px;
+  }
+
+    .dx-popup-title .dx-closebutton .dx-icon {
+      width: 27px;
+      height: 28px;
+      background-position: 3px 3px;
+      background-size: 15px 15px;
+      padding: 3px;
+      font-size: 20px;
+      text-align: center;
+      line-height: 27px;
+      box-shadow: 0 1px 3px transparent;
+      background-color: #e6e6e6;
+      border-color: #bebebe;
+    }
+
+body {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 12px !important;
+  color: #0555AB !important;
+}
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #337ab7 !important;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle, .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-accent:active .mat-radio-persistent-ripple {
+  background-color: #337ab7 !important;
+}
+
+.mat-radio-label {
+  margin: 0 !important;
+}
+
+.mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana, sans-serif;
+}
+
+  /* Styles for the active tab label */
+  .mat-tab-label.mat-tab-label-active {
+    min-width: 25px !important;
+    padding: 5px;
+    background-color: transparent;
+    font-weight: bold;
+  }
+
+/* Styles for the ink bar */
+.mat-ink-bar {
+  background-color: green;
+}
+
+.mat-expansion-panel-body {
+  padding: 0 0px 16px !important;
+}

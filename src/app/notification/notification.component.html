@@ -1,0 +1,62 @@
+<div class="list-container">
+    <app-swipe-to-delete-item *ngFor="let item of items" [item]="item"></app-swipe-to-delete-item>
+</div>
+<div class="warpper">
+    <div [ngClass]="item.read ? 'noti_read' : 'noti_open'" *ngFor="let item of notification">
+        <div class="noti_title">Update on National Level Achievement !!! </div>
+        <div class="noti_des">Your affiliated headquarters are underperforming in comparison to the national
+            average
+            achievement..</div>
+        <div class="noti_date">
+            {{item.varDate}}
+        </div>
+        <div style="clear:both;" *ngIf="item.isVisible">
+            <div class="noti_des">Your performance for this month is below average when compared to the national
+                average of {{item.ach}}.</div>
+            <div class="noti_sub_title">Your last 3 month of avg is</div>
+            <div class="noti_inside_box">
+                <table width="100%">
+                    <tr>
+                        <td style="font-weight:600; color:#29353A;">HQ</td>
+                        <td style="font-weight:600; color:#29353A;">May</td>
+                        <td style="font-weight:600; color:#29353A;">June</td>
+                        <td style="font-weight:600; color:#29353A;">July</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" style="height:1px; padding:0;">
+                            <hr style="border-top: 1px solid #CAEDFF; padding:0; margin:0;">
+                        </td>
+                    </tr>
+                    <tr *ngFor="let item of item.items">
+                        <td style="font-weight:600; color:#0074A5;">{{item.hq}}</td>
+                        <td style="font-weight:600; color:#0074A5;">{{item.varMonth1}}</td>
+                        <td style="font-weight:600; color:#0074A5;">{{item.varMonth2}}</td>
+                        <td style="font-weight:600; color:#0074A5;">{{item.varMonth3}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="float: right; width: 20%;">
+            <a style="cursor:pointer;" (click)="toggleVisibility(item);">
+                <span *ngIf="item.isVisible == true">Read less</span>
+                <span *ngIf="item.isVisible == false">Read more</span>
+            </a>
+        </div>
+    </div>
+    <!--<div class="noti_read">
+        <div class="noti_title">Update on National Level Achievement !!! </div>
+        <div class="noti_des_read">Your affiliated headquarters are underperforming in comparison to the national average achievement..</div>
+        <div class="noti_date">02-July-2023</div>
+
+    </div>
+    <div class="noti_read">
+        <div class="noti_title">Update on National Level Achievement !!! </div>
+        <div class="noti_des_read">Your affiliated headquarters are underperforming in comparison to the national average achievement..</div>
+        <div class="noti_date">02-July-2023</div>
+    </div>
+    <div class="noti_read">
+        <div class="noti_title">Update on National Level Achievement !!! </div>
+        <div class="noti_des_read">Your affiliated headquarters are underperforming in comparison to the national average achievement..</div>
+        <div class="noti_date">02-July-2023</div>
+    </div>-->
+</div>

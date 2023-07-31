@@ -1,0 +1,12 @@
+<!-- swipe-to-delete-item.component.html -->
+<div
+  class="list-item"
+  (cdkDragStart)="onDragStart()"
+  (cdkDragEnded)="onDragEnd()"
+  (cdkDragExited)="onDragExited()"
+  [ngClass]="{ 'swipe-active': showDeleteButton }"
+>
+  <!-- Display your list item content here -->
+  <div class="item-content">{{ item.text }}</div>
+  <button class="delete-button" *ngIf="showDeleteButton" (click)="onDelete()">Delete</button>
+</div>

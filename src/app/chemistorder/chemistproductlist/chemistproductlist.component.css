@@ -1,0 +1,33 @@
+.example-headers-align .mat-expansion-panel-header {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  height: 45px !important;
+  cursor: pointer;
+  color: #252525;
+  background-color: #e7f6fa;
+  border: 1px solid #92d0f1;
+  border-radius: 4px;
+  line-height: 33px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  -webkit-box-shadow: 0 0.4rem 0.4rem rgba(0,0,0,.15);
+  -moz-box-shadow: 0 .4rem 0.4rem rgba(0,0,0,.15);
+  box-shadow: 0 0.4rem 0.4rem rgba(0,0,0,.15);
+}
+
+
+.fix-next-ProductNextbtn {  
+  width: 20%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  background-color: #2cbbe3;
+  padding: 5px;
+  color: #FFF !important;
+  text-decoration: none !important;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  margin-left: 25%;
+}

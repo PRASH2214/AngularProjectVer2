@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+</head>
+
+<body>
+    <!-- <div class="spacer30"></div> -->
+    <div class="custom_container">
+
+        <div class="theme_box">
+            <div class="boxs color2">
+                <div class="color_title2">
+                    Planned Users
+                </div>
+                <div class="boxs-pad">
+                    M : {{lblPlannedUsersVal}}
+                </div>
+            </div>
+            <div class="boxs color3">
+                <div class="color_title3">
+                    Actual Users
+                </div>
+                <div class="boxs-pad">
+                    M : {{lblActualUsersVal}}
+                </div>
+            </div>
+            <div class="boxs color4">
+                <div class="color_title4">
+                    Planned POB
+                </div>
+                <div class="boxs-pad">
+                    M : {{lblPlannedPOBVal}}
+                </div>
+            </div>
+            <div class="boxs color5">
+                <div class="color_title5">
+                    Actual POB
+                </div>
+                <div class="boxs-pad">
+                    M : {{lblActualPOBVal}}
+                </div>
+            </div>
+            <div class="boxs color6">
+                <div class="color_title6">
+                    Planned to Actual Difference
+                </div>
+                <div class="boxs-pad">
+                    M : {{lblPlannedtoA_Val}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="custom_container mb25">
+        <div class="themebox">
+            <div class="w50 fl wedget_title">
+                <p>{{varDesignationName}} wise Planned Vs Actual POB</p>
+            </div>
+            <div class="w50 fl pob-text text-md-right text-sm-right text-xs-left">
+
+                <span>
+                    <div *ngIf="isShowBack">
+                        <a routerLink="dashboard" (click)="BackPOB()" class="btn btn-link">Back</a>
+                    </div>
+                </span>
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="w48 fl mrr10 chartbox">
+                <dx-chart #ChartPlannedVsActualUser (onPointClick)="onPatchPointClick_PlannedVsActualUser($event)"
+                    [class]="'pointer-on-bars'" id="ChartPlannedVsActualUser" [dataSource]="PlannedVsActual"
+                    (onLegendClick)="chart_onLegendClick($event)">
+                    <dxo-loading-indicator [show]="true">
+                        <dxo-font [size]="20"></dxo-font>
+                    </dxo-loading-indicator>
+                    <dxo-title text="{{varDesignationName}} - PLANNED VS ACTUAL USERS">
+                        <dxo-font [size]="20" [weight]="600"></dxo-font>
+                    </dxo-title>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                    <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                        <dxo-grid [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxi-value-axis>
+                    <dxo-common-series-settings argumentField="varEmpName" type="bar" hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                         color:'#000000'
+                        }" [format]="{ 
+                        type: 'fixedPoint',
+                        precision: '0'
+                    }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+                    <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                        <dxo-label [customizeHint]="customizeHint" wordWrap="none" overlappingBehavior="stagger"
+                            [customizeText]="customizeText">
+                        </dxo-label>
+                    </dxo-argument-axis>
+                    <dxi-series argumentField="varEmpName" valueField="PlannedUsers" color="#ED7D31"
+                        name="Sum of Planned Users">
+                        <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabelPlanUser">
+                            <dxo-font [size]="11"></dxo-font>
+                        </dxo-label>
+                    </dxi-series>
+                    <dxi-series argumentField="varEmpName" valueField="ActualUsers" color="#FFC000"
+                        name="Sum of Actual Users">
+                        <dxo-label [visible]="true" position="columns" [customizeText]="customizeLabelActualUser">
+                            <dxo-font [size]="11"></dxo-font>
+                        </dxo-label>
+                    </dxi-series>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                    </dxo-legend>
+                </dx-chart>
+            </div>
+            <div class="w48 fl mrr10 chartbox">
+                <dx-chart #ChartPlannedVsActualPOB (onPointClick)="onPatchPointClick_PlannedVsActualUser($event)"
+                    [class]="'pointer-on-bars'" id="ChartPlannedVsActualPOB" [dataSource]="PlannedVsActual"
+                    (onLegendClick)="chart_onLegendClick($event)">
+                    <dxo-loading-indicator [show]="true">
+                        <dxo-font [size]="20"></dxo-font>
+                    </dxo-loading-indicator>
+                    <dxo-title text="{{varDesignationName}} - PLANNED VS Vs ACTUAL POB">
+                        <dxo-font [size]="20" [weight]="600"></dxo-font>
+                    </dxo-title>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                    <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                        <dxo-grid [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxi-value-axis>
+                    <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                        <dxo-label [customizeHint]="customizeHint" wordWrap="none" overlappingBehavior="stagger"
+                            [customizeText]="customizeText">
+                        </dxo-label>
+                    </dxo-argument-axis>
+                    <dxo-common-series-settings argumentField="varEmpName" type="bar" hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="false" backgroundColor="#FFFFF" [font]="{
+                     color:'#000000'
+                    }" [format]="{ 
+                    type: 'fixedPoint',
+                    precision: '0'
+                }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+
+                    <dxi-series argumentField="varEmpName" valueField="PlannedPOB" color="#4472C4"
+                        name="Sum of Planned POB">
+                        <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabelPlanPOB">
+                            <dxo-font [size]="11"></dxo-font>
+                        </dxo-label>
+                    </dxi-series>
+                    <dxi-series argumentField="varEmpName" valueField="ActualPOB" color="#ED7D31"
+                        name="Sum of Actual POB">
+                        <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabelActualPOB">
+                            <dxo-font [size]="11"></dxo-font>
+                        </dxo-label>
+                    </dxi-series>
+                    <dxi-series argumentField="varEmpName" valueField="MissedOpportunity" color="#FFC000"
+                        name="Sum of Missed Opportunity">
+                        <dxo-label [visible]="false" position="columns" [customizeText]="customizeLabelMissedOpp">
+                            <dxo-font [size]="11"></dxo-font>
+                        </dxo-label>
+                    </dxi-series>
+                    <dxi-series argumentField="varEmpName" valueField="Potential" name="Sum of Potential" type="line"
+                        color="#A5A5A5">
+                    </dxi-series>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                    </dxo-legend>
+                </dx-chart>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="custom_container mb25">
+        <div class="themebox">
+            <div class="w50 fl wedget_title">
+                <p>Patch Analysis</p>
+            </div>
+            <div class="w50 fl pob-text text-md-right text-sm-right text-xs-left">
+                <form>
+                    <mat-radio-group (change)="onItemChange($event)" aria-label="Select an option">
+                        <mat-radio-button [checked]="true" value="0">TOP 10</mat-radio-button>
+                        <mat-radio-button value="1">Bottom 10</mat-radio-button>
+                    </mat-radio-group> &nbsp;
+                    <span>(On basis of Actual POB)</span>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+            <div class="w48 fl mrr10 chartbox">
+                <ng-container *ngIf="iSShowTop10">
+                    <dx-chart #chartPatchwiseUserTop10 (onPointClick)="onPatchPointClick($event)"
+                        [class]="'pointer-on-bars'" id="chartPatchwiseUserTop10" [dataSource]="patchdataSourceTop10"
+                        (onLegendClick)="chart_onLegendClick($event)">
+                        <dxo-loading-indicator [show]="true">
+                            <dxo-font [size]="20"></dxo-font>
+                        </dxo-loading-indicator>
+                        <dxo-title text="Patch Wise Users">
+                            <dxo-font [size]="20" [weight]="600"></dxo-font>
+                        </dxo-title>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                        <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                            <dxo-grid [width]="0.3" [opacity]="1">
+                            </dxo-grid>
+                        </dxi-value-axis>
+                        <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                            <dxo-label [customizeHint]="customizeHint" wordWrap="normal" overlappingBehavior="stagger"
+                                [customizeText]="customizeText">
+                            </dxo-label>
+                        </dxo-argument-axis>
+                        <dxo-common-series-settings argumentField="varPatchName" type="bar"
+                            hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                            <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                             color:'#000000'
+                            }" [format]="{ 
+                            type: 'fixedPoint',
+                            precision: '0'
+                        }">
+                            </dxo-label>
+                        </dxo-common-series-settings>
+                        <dxi-series argumentField="varPatchName" valueField="PlannedUsers" name="Planned Users"
+                            type="bar" color="#3B64AD">
+                        </dxi-series>
+                        <dxi-series argumentField="varPatchName" valueField="ActualUsers" name="Actual Users" type="bar"
+                            color="#8FA2D4">
+                        </dxi-series>
+                        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                        </dxo-legend>
+                    </dx-chart>
+                </ng-container>
+
+                <ng-container *ngIf="iSShowBottom10">
+                    <dx-chart #chartPatchwiseUserBottom10 (onPointClick)="onPatchPointClick($event)"
+                        [class]="'pointer-on-bars'" id="chartPatchwiseUserBottom10"
+                        [dataSource]="patchdataSourceBottom10" (onLegendClick)="chart_onLegendClick($event)">
+                        <dxo-loading-indicator [show]="true">
+                            <dxo-font [size]="20"></dxo-font>
+                        </dxo-loading-indicator>
+                        <dxo-title text="Patch Wise Users">
+                            <dxo-font [size]="20" [weight]="600"></dxo-font>
+                        </dxo-title>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                        <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                            <dxo-grid [width]="0.3" [opacity]="1">
+                            </dxo-grid>
+                        </dxi-value-axis>
+                        <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                            <dxo-label [customizeHint]="customizeHint" wordWrap="normal" overlappingBehavior="stagger"
+                                [customizeText]="customizeText">
+                            </dxo-label>
+                        </dxo-argument-axis>
+                        <dxo-common-series-settings argumentField="varPatchName" type="bar"
+                            hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                            <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                             color:'#000000'
+                            }" [format]="{ 
+                            type: 'fixedPoint',
+                            precision: '0'
+                        }">
+                            </dxo-label>
+                        </dxo-common-series-settings>
+                        <dxi-series argumentField="varPatchName" valueField="PlannedUsers" name="Planned Users"
+                            type="bar" color="#3B64AD">
+                        </dxi-series>
+                        <dxi-series argumentField="varPatchName" valueField="ActualUsers" name="Actual Users" type="bar"
+                            color="#8FA2D4">
+                        </dxi-series>
+                        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                        </dxo-legend>
+                    </dx-chart>
+                </ng-container>
+            </div>
+            <div class="w48 fl mrr10 chartbox">
+                <ng-container *ngIf="iSShowTop10">
+                    <dx-chart #chartPatchwisePOBTop10 id="chartPatchwisePOBTop10" [dataSource]="patchdataSourceTop10"
+                        (onLegendClick)="chart_onLegendClick($event)">
+                        <dxo-loading-indicator [show]="true">
+                            <dxo-font [size]="20"></dxo-font>
+                        </dxo-loading-indicator>
+                        <dxo-title text="Patch Wise POB">
+                            <dxo-font [size]="20" [weight]="600"></dxo-font>
+                        </dxo-title>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                        <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                            <dxo-grid [width]="0.3" [opacity]="1">
+                            </dxo-grid>
+                        </dxi-value-axis>
+                        <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                            <dxo-label [customizeHint]="customizeHint" wordWrap="none" overlappingBehavior="stagger"
+                                [customizeText]="customizeText">
+                            </dxo-label>
+                        </dxo-argument-axis>
+                        <dxo-common-series-settings argumentField="varPatchName" type="bar"
+                            hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                            <dxo-label [visible]="false" backgroundColor="#FFFFF" [font]="{
+                         color:'#000000'
+                        }" [format]="{ 
+                        type: 'fixedPoint',
+                        precision: '0'
+                    }">
+                            </dxo-label>
+                        </dxo-common-series-settings>
+                        <dxi-series argumentField="varPatchName" valueField="PlannedPOB" name="Planned POB" type="bar"
+                            color="#5B8E39">
+                        </dxi-series>
+                        <dxi-series argumentField="varPatchName" valueField="ActualPOB" name="Actual POB" type="bar"
+                            color="#70AD47">
+                        </dxi-series>
+                        <dxi-series argumentField="varPatchName" valueField="Potential" name="Potential" type="line"
+                            color="#B4CFA8">
+                        </dxi-series>
+                        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                        </dxo-legend>
+                    </dx-chart>
+                </ng-container>
+                <ng-container *ngIf="iSShowBottom10">
+                    <dx-chart #chartPatchwisePOBBottom10 id="chartPatchwisePOBBottom10"
+                        [dataSource]="patchdataSourceBottom10" (onLegendClick)="chart_onLegendClick($event)">
+                        <dxo-loading-indicator [show]="true">
+                            <dxo-font [size]="20"></dxo-font>
+                        </dxo-loading-indicator>
+                        <dxo-title text="Patch Wise POB">
+                            <dxo-font [size]="20" [weight]="600"></dxo-font>
+                        </dxo-title>
+                        <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                        <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                            <dxo-grid [width]="0.3" [opacity]="1">
+                            </dxo-grid>
+                        </dxi-value-axis>
+                        <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                            <dxo-label [customizeHint]="customizeHint" wordWrap="none" overlappingBehavior="stagger"
+                                [customizeText]="customizeText">
+                            </dxo-label>
+                        </dxo-argument-axis>
+                        <dxo-common-series-settings argumentField="varPatchName" type="bar"
+                            hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                            <dxo-label [visible]="false" backgroundColor="#FFFFF" [font]="{
+                         color:'#000000'
+                        }" [format]="{ 
+                        type: 'fixedPoint',
+                        precision: '0'
+                    }">
+                            </dxo-label>
+                        </dxo-common-series-settings>
+                        <dxi-series argumentField="varPatchName" valueField="PlannedPOB" name="Planned POB" type="bar"
+                            color="#5B8E39">
+                        </dxi-series>
+                        <dxi-series argumentField="varPatchName" valueField="ActualPOB" name="Actual POB" type="bar"
+                            color="#70AD47">
+                        </dxi-series>
+                        <dxi-series argumentField="varPatchName" valueField="Potential" name="Potential" type="line"
+                            color="#B4CFA8">
+                        </dxi-series>
+                        <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                        </dxo-legend>
+                    </dx-chart>
+                </ng-container>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="custom_container mb25">
+        <div class="themebox">
+            <div class="w50 fl wedget_title">
+                <p>{{Speciality_Title}} Analysis</p>
+            </div>
+            <div class="w50 fl pob-text text-md-right text-sm-right text-xs-left">
+                <form>
+                    <span>Patch : {{lblSelectedPatch}}</span>
+                </form>
+            </div>
+            <div class="clearfix"></div>
+
+            <div style="padding:10px;">
+                <div class="worko-tabs">
+
+                    <mat-tab-group mat-stretch-tabs (selectedTabChange)="tabChanged($event)">
+                        <mat-tab [label]="SpecialtyWiseUsers">
+                            <dx-chart (onPointClick)="onSpecialtyPointClick($event)" #chartSpecialityWiseUser
+                                id="chartSpecialityWiseUser" [dataSource]="specialtyDataSource" [rotated]="false"
+                                (onLegendClick)="chart_onLegendClick($event)">
+                                <dxo-loading-indicator [show]="true">
+                                    <dxo-font [size]="20"></dxo-font>
+                                </dxo-loading-indicator>
+                                <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                                <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                                    <dxo-grid [width]="0.3" [opacity]="1">
+                                    </dxo-grid>
+                                </dxi-value-axis>
+                                <dxo-common-series-settings argumentField="varSpecialtyName" type="bar"
+                                    hoverMode="allArgumentPoints" barPadding="0" selectionMode="allArgumentPoints">
+                                    <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                                                 color:'#000000'
+                                                }" [format]="{ 
+                                                type: 'fixedPoint',
+                                                precision: '0'
+                                            }">
+                                    </dxo-label>
+                                </dxo-common-series-settings>
+                                <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                                    <dxo-label [customizeHint]="customizeHint" wordWrap="none"
+                                        overlappingBehavior="stagger" [customizeText]="customizeText">
+                                    </dxo-label>
+                                </dxo-argument-axis>
+                                <dxi-series argumentField="varSpecialtyName" valueField="ActualUsers"
+                                    name="Actual Users" type="bar" color="#8FA2D4">
+                                </dxi-series>
+                                <dxi-series argumentField="varSpecialtyName" valueField="PlannedUsers"
+                                    name="Planned Users" type="bar" color="#3B64AD">
+                                </dxi-series>
+                                <dxo-legend verticalAlignment="bottom" horizontalAlignment="center"
+                                    itemTextPosition="right">
+                                </dxo-legend>
+                            </dx-chart>
+                        </mat-tab>
+                        <mat-tab [label]="SpecialtyWisePOB">
+                            <dx-chart #chartSpecialityWisePOB id="chartSpecialityWisePOB"
+                                [dataSource]="specialtyDataSource" (onLegendClick)="chart_onLegendClick($event)">
+                                <dxo-loading-indicator [show]="true">
+                                    <dxo-font [size]="20"></dxo-font>
+                                </dxo-loading-indicator>
+                                <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                                <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                                    <dxo-grid [width]="0.3" [opacity]="1">
+                                    </dxo-grid>
+                                </dxi-value-axis>
+                                <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                                    <dxo-label [customizeHint]="customizeHint" wordWrap="none"
+                                        overlappingBehavior="stagger" [customizeText]="customizeText">
+                                    </dxo-label>
+                                </dxo-argument-axis>
+                                <dxo-common-series-settings argumentField="varSpecialtyName" type="bar"
+                                    hoverMode="allArgumentPoints" barPadding="0" selectionMode="allArgumentPoints">
+                                    <dxo-label [visible]="false" backgroundColor="#FFFFF" [font]="{
+                                                 color:'#000000'
+                                                }" [format]="{ 
+                                                type: 'fixedPoint',
+                                                precision: '0'
+                                            }">
+                                    </dxo-label>
+                                </dxo-common-series-settings>
+                                <dxi-series argumentField="varSpecialtyName" valueField="PlannedPOB" name="Planned POB"
+                                    type="bar" color="#5B8E39">
+                                </dxi-series>
+                                <dxi-series argumentField="varSpecialtyName" valueField="ActualPOB" name="Actual POB"
+                                    type="bar" color="#70AD47">
+                                </dxi-series>
+                                <dxi-series argumentField="varSpecialtyName" valueField="Potential" name="Potential"
+                                    type="scatter" color="#B4CFA8" [point]="{ symbol: 'square' }">
+                                </dxi-series>
+                                <dxo-legend verticalAlignment="bottom" horizontalAlignment="center"
+                                    itemTextPosition="right">
+                                </dxo-legend>
+                            </dx-chart>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="custom_container mb25">
+        <div class="themebox">
+            <div class="w50 fl wedget_title">
+                <p>Product Analysis</p>
+            </div>
+            <div class="w50 fl pob-text text-md-right text-sm-right text-xs-left">
+                <span>Patch : {{lblSelectedPatch}} &nbsp;&nbsp; {{Speciality_Title}} : {{lblSelectedSpecialty}}</span>
+            </div>
+            <div class="clearfix"></div>
+            <div class="w48 fl mrr10 chartbox">
+                <dx-chart #chartProductPlannedVsActualUser id="chartProductPlannedVsActualUser"
+                    [dataSource]="productDataSource" (onLegendClick)="chart_onLegendClick($event)">
+                    <dxo-loading-indicator [show]="true">
+                        <dxo-font [size]="20"></dxo-font>
+                    </dxo-loading-indicator>
+                    <dxo-title text="Product Planned Vs Actual Users">
+                        <dxo-font [size]="20" [weight]="600"></dxo-font>
+                    </dxo-title>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                    <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                        <dxo-grid [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxi-value-axis>
+                    <dxo-common-series-settings argumentField="varProductName" type="bar" hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                         color:'#000000'
+                        }" [format]="{ 
+                        type: 'fixedPoint',
+                        precision: '0'
+                    }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+                    <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                        <dxo-label [customizeHint]="customizeHint" wordWrap="none" overlappingBehavior="stagger"
+                            [customizeText]="customizeText">
+                        </dxo-label>
+                    </dxo-argument-axis>
+                    <dxi-series argumentField="varProductName" valueField="PlannedUsers" name="Planned Users" type="bar"
+                        color="#3B64AD">
+                    </dxi-series>
+                    <dxi-series argumentField="varProductName" valueField="ActualUsers" name="Actual Users" type="bar"
+                        color="#8FA2D4">
+                    </dxi-series>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                    </dxo-legend>
+
+                </dx-chart>
+            </div>
+            <div class="w48 fl mrr10 chartbox">
+                <dx-chart #chartProductPlannedVsActualUsage id="chartProductPlannedVsActualUsage"
+                    [dataSource]="productDataSource" (onLegendClick)="chart_onLegendClick($event)">
+                    <dxo-loading-indicator [show]="true">
+                        <dxo-font [size]="20"></dxo-font>
+                    </dxo-loading-indicator>
+                    <dxo-title text="Product Planned Vs Actual Usage">
+                        <dxo-font [size]="20" [weight]="600"></dxo-font>
+                    </dxo-title>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                    <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                        <dxo-grid [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxi-value-axis>
+                    <dxo-argument-axis type="discrete" hoverMode="allArgumentPoints">
+                        <dxo-label [customizeHint]="customizeHint" wordWrap="none" overlappingBehavior="stagger"
+                            [customizeText]="customizeText">
+                        </dxo-label>
+                    </dxo-argument-axis>
+                    <dxo-common-series-settings argumentField="varProductName" type="bar" hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="false" backgroundColor="#FFFFF" [font]="{
+             color:'#000000'
+            }" [format]="{ 
+            type: 'fixedPoint',
+            precision: '0'
+        }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+                    <dxi-series argumentField="varProductName" valueField="PlannedPOB" name="Planned POB" type="bar"
+                        color="#5B8E39">
+                    </dxi-series>
+                    <dxi-series argumentField="varProductName" valueField="ActualPOB" name="Actual POB" type="bar"
+                        color="#70AD47">
+                    </dxi-series>
+                    <dxi-series argumentField="varProductName" valueField="Potential" name="Potential" type="scatter"
+                        color="#B4CFA8" [point]="{ symbol: 'square' }">
+                    </dxi-series>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                    </dxo-legend>
+
+                </dx-chart>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="custom_container mb25">
+        <div class="themebox">
+            <div class="w50 fl wedget_title">
+                <p>6 M Trend</p>
+            </div>
+            <div class="w50 fl pob-text text-md-right text-sm-right text-xs-left">
+
+                <span>Patch : {{lblSelectedPatch}} &nbsp;&nbsp; {{Speciality_Title}} : {{lblSelectedSpecialty}}</span>
+
+            </div>
+            <div class="clearfix"></div>
+            <div class="w48 fl mrr10 chartbox">
+                <dx-chart #chartUserTrend id="chartUserTrend" [dataSource]="monthWiseDataSource"
+                    (onLegendClick)="chart_onLegendClick($event)">
+                    <dxo-loading-indicator [show]="true">
+                        <dxo-font [size]="20"></dxo-font>
+                    </dxo-loading-indicator>
+
+                    <dxo-title text="Users Trend">
+                        <dxo-font [size]="20" [weight]="600"></dxo-font>
+                    </dxo-title>
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                    <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                        <dxo-grid [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxi-value-axis>
+                    <dxo-argument-axis valueMarginsEnabled="false" discreteAxisDivisionMode="crossLabels">
+                        <dxo-grid [visible]="true" [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxo-argument-axis>
+                    <!-- <dxo-common-series-settings barGroupPadding="0.2" argumentField="Month">
+                    </dxo-common-series-settings> -->
+                    <dxo-common-series-settings argumentField="Month" type="bar" hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="true" backgroundColor="#FFFFF" [font]="{
+                     color:'#000000'
+                    }" [format]="{ 
+                    type: 'fixedPoint',
+                    precision: '0'
+                }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+                    <dxi-series argumentField="Month" valueField="ActualUsers" name="Actual Users" color="#8FA2D4">
+                    </dxi-series>
+                    <dxi-series argumentField="Month" valueField="PlannedUsers" name="Planned Users" color="#3B64AD">
+                    </dxi-series>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                    </dxo-legend>
+
+                </dx-chart>
+            </div>
+            <div class="w48 fl mrr10 chartbox">
+                <dx-chart #chartPOBTrend id="chartPOBTrend" [dataSource]="monthWiseDataSource"
+                    (onLegendClick)="chart_onLegendClick($event)">
+                    <dxo-loading-indicator [show]="true">
+                        <dxo-font [size]="20"></dxo-font>
+                    </dxo-loading-indicator>
+                    <dxo-title text="POB Trend">
+                        <dxo-font [size]="20" [weight]="600"></dxo-font>
+                    </dxo-title>
+
+                    <dxo-tooltip [enabled]="true" [customizeTooltip]="customizeTooltip"></dxo-tooltip>
+                    <dxi-value-axis [maxValueMargin]="0.05" [allowDecimals]="false">
+                        <dxo-grid [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxi-value-axis>
+                    <dxo-argument-axis valueMarginsEnabled="false" discreteAxisDivisionMode="crossLabels">
+                        <dxo-grid [visible]="true" [width]="0.3" [opacity]="1">
+                        </dxo-grid>
+                    </dxo-argument-axis>
+                    <dxo-common-series-settings argumentField="Month" type="bar" hoverMode="allArgumentPoints"
+                        selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="false" backgroundColor="#FFFFF" [font]="{
+                 color:'#000000'
+                }" [format]="{ 
+                type: 'fixedPoint',
+                precision: '0'
+            }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+                    <dxi-series argumentField="Month" valueField="PlannedPOB" name="Planned POB" type="bar"
+                        color="#5B8E39">
+                    </dxi-series>
+                    <dxi-series argumentField="Month" valueField="ActualPOB" name="Actual POB" type="bar"
+                        color="#70AD47">
+                    </dxi-series>
+                    <dxi-series argumentField="Month" valueField="Potential" name="Potential" type="stackedline"
+                        color="#B4CFA8">
+                        <!-- <dxo-label [visible]="false">
+                        </dxo-label> -->
+                    </dxi-series>
+
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right">
+                    </dxo-legend>
+
+                </dx-chart>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

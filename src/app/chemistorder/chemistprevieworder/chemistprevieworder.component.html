@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <!--<link href="../../../assets/chemist/css/bootstrap.min.css" rel="stylesheet" />-->
+  <!--<link href="../../../assets/chemist/css/custom.css" rel="stylesheet" />-->
+  <!--<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">-->
+  <!--<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />-->
+  <!--<link href="../../../assets/chemist/css/accordion.css" rel="stylesheet" />-->
+  <title></title>
+</head>
+<body style="background-color:#F5F5F5;min-height:115vh;">
+  <div class="header">
+    <div class="flat-header">
+      <a href="javascript:void(0)" (click)="backClick()" class="back"><</a>
+      <img src="assets/chemist/images/ecubix.svg" alt="" />
+    </div>
+  </div>
+  <div class="subtitle">
+    Product List
+  </div>
+  <form [formGroup]="PreviewOrderForm">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="p-order-bg">
+            <div class="table-responsive" style="overflow-x:scroll;overflow-y:scroll;max-height: 500px;">
+              <table class="table custom-table">
+                <thead>
+                  <tr>
+                    <th hidden="hidden">Product id</th>
+                    <th>Product Name</th>
+                    <th width="100" class="text-center">Discount</th>
+                    <th width="100" class="text-center">#Qty</th>
+                    <th width="100" class="text-center">#Free Qty</th><!--class="text-center"-->
+                    <th width="100" class="text-center"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let Product of ProductPreviewList | OrderBy:'varProductName'">
+                    <td hidden="hidden">{{Product.fk_ProductGlCode}}</td>
+                    <td >{{Product.varProductName}}</td>
+                    <td class="text-center">
+                      <input type="text" name="name" value={{Product.intDiscount}} class="form-control inputtable" readonly style="width: 60px !important;" />
+                    </td>
+                    <td>
+                      <input type="text" name="name" value={{Product.Qty}} class="form-control inputtable" readonly style="width: 60px !important;" />
+                    </td>
+                    <td>
+                      <input type="text" name="name" value={{Product.intFreeQty}} class="form-control inputtable" readonly style="width: 60px !important;" />
+                      <!--<img src="assets/chemist/images/Delete.png" alt=""  type="button" class="btn deletebtn" (click)="DeleteProduct(Product.fk_ProductGlCode)" />-->
+                    </td>
+                    <td><img src="assets/chemist/images/Delete.png" alt="" style="height: 25px;width: 25px;cursor: pointer" class="image-exercise" (click)="DeleteProduct(Product.fk_ProductGlCode)"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12" style="margin-bottom:50px;">
+          <div class="form-group mt-4">
+            <label for="exampleFormControlSelect1">Pref. {{PrefereStockistName}}</label><span style="color:red">*</span>
+            <select class="form-control form-control-md stockist" formControlName="fk_PrefStockist">
+              <option value="">Select</option>
+              <option *ngFor="let stocist of PrefereStockist" value={{stocist.Fk_StockistGlCode}}>
+                {{stocist.varStockistName}}
+              </option>
+            </select>
+            <div *ngIf="f.fk_PrefStockist.errors" class="invalid-feedback">
+              <div *ngIf="f.fk_PrefStockist.errors.required" style="color: red;">Pref. Stockist is required</div>
+            </div>
+          </div>
+        </div>
+        <!--<br />
+        <br />
+        <br />-->
+        <!--<div class="mb-4">&nbsp;</div>-->
+      </div>
+
+    </div>
+
+    <div>
+      <!--<a href="#" class="fix-next-btn"> Submit</a>-->
+      <button [disabled]="loading" class="fix-next-btn" (click)="SaveOrder()">Submit</button>
+    </div>
+  </form>
+
+  <ng4-loading-spinner> </ng4-loading-spinner>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!--<script src="../../../assets/chemist/js/jquery-3.2.1.slim.min.js"></script>
+  <script src="../../../assets/chemist/js/popper.min.js"></script>
+  <script src="../../../assets/chemist/js/bootstrap.min.js"></script>
+  <script src="../../../assets/chemist/js/accordion.js"></script>-->
+</body>
+</html>

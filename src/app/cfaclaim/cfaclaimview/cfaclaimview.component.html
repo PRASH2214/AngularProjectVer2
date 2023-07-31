@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cfa-tabel</title>
+  <link rel="icon" href="assets/cfaclaim/images/eris-logo.png" type="image/png">
+</head>
+<body style="font-size: 14px!important;overflow-y: unset !important;">
+  <div class="label_alignment">
+    <img class="img-responsive main-logo" src="assets/cfaclaim/images/eris logo copy.svg" alt="eris" width="140" height="220">
+  </div>
+  <div class="box_main">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-6 excecute-btn1">
+            <button type="button" class="btn btn-danger" (click)="RefereshData()">
+              <i class="fa fa-refresh" aria-hidden="true"></i>
+            </button>
+            <span style="padding-left:5px;">
+              <button type="button" class="btn btn-success" (click)="DownLoadData()">
+                <i class="fa fa-download" aria-hidden="true"></i>
+              </button>
+            </span>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-6 excecute-btn1 text-right" (click)="SignOut()">
+            <button type="button" class="btn btn-success">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <form class="form-inline" #Cfaclaimviewform="ngForm">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="form-group">
+            <label class="label_main" style="padding:10px;">From Date</label>
+            <mat-form-field appearance="fill">
+              <!--<mat-label>Choose a date</mat-label>-->
+              <input matInput [matDatepicker]="picker2" [(ngModel)]="FromDate" [ngModelOptions]="{standalone: true}" readonly>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <label class="label_main" style="padding:10px;">To Date</label>
+            <mat-form-field appearance="fill">
+              <!--<mat-label>Choose a date</mat-label>-->
+              <input matInput [matDatepicker]="picker1" [(ngModel)]="ToDate" [ngModelOptions]="{standalone: true}" readonly>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="form-group">
+            <label class="label_main" style="padding:10px;">Claim Status</label>
+            <mat-form-field appearance="fill">
+              <!--<mat-label>Status</mat-label>-->
+              <mat-select [(ngModel)]="Status" [ngModelOptions]="{standalone: true}">
+                <mat-option value="">All</mat-option>
+                <mat-option value="P">Pending</mat-option>
+                <mat-option value="U">Valid</mat-option>
+                <mat-option value="I">Invalid</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <button type="button" class="btn btn-success green-1" (click)="BindGrid()">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-12" style="margin-left: 12px;">
+          <p class="note main_status">Note: From & To Date will work on Claim Date</p>
+        </div>
+      </form>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 fill_box" style="padding-top: 26px;">
+          <div class="table-responsive cfa-table" style="padding-top: 6px !important;width: 104% !important;">
+            <table class="table table-bordered text-center">
+              <thead>
+                <tr>
+                  <th>Action</th>
+                  <!--<th>{{varCFANameDyn}} Code</th>-->
+                  <th>{{varCFANameDyn}} Name</th>
+                  <th>Reference ID</th>
+                  <th>{{varStockistNameDyn}} Code</th>
+                  <th>{{varStockistNameDyn}} Name</th>
+                  <th>Claim Doc No.</th>
+                  <th>Claim Date</th>
+                  <th>{{varStockistNameDyn}} Ref No</th>
+                  <th>Claim Status</th>
+                  <th>File Upload Status</th>
+                  <th>Latest Updated On</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <!--<td style="min-width: 126px !important;">
+    <div class="form-group has-feedback">
+      <input type="text" class="form-control" [(ngModel)]="serchCFACode" style="position:relative;" />
+      <span style="position:absolute; right:8px;top:8px;color: #0555AB;" class="fa fa-search "></span>
+    </div>
+  </td>-->
+                  <td style="min-width: 126px !important;">
+                    <div class="form-group has-feedback">
+                      <input type="text" class="form-control" [(ngModel)]="serchCFAName" style="position:relative;" />
+                      <span style="position:absolute; right:8px;top:8px;color: #0555AB;" class="fa fa-search "></span>
+                    </div>
+
+                  </td>
+                  <td style="min-width: 126px !important;">
+                    <div class="form-group has-feedback">
+                      <input type="text" class="form-control" [(ngModel)]="serchReferenceID" style="position:relative;">
+                      <span style="position:absolute; right:8px;top:8px;color: #0555AB;" class="fa fa-search "></span>
+                    </div>
+                  </td>
+                  <td style="min-width: 119px !important;">
+                    <div class="form-group has-feedback">
+                      <input type="text" class="form-control" [(ngModel)]="serchStockistCode" style="position:relative;">
+                      <span style="position:absolute; right:8px;top:8px;color: #0555AB;" class="fa fa-search "></span>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="form-group has-feedback" style="min-width: 126px !important;">
+                      <input type="text" class="form-control" [(ngModel)]="serchStockistName" style="position:relative;">
+                      <span style="position:absolute; right:8px;top:8px;color: #0555AB;" class="fa fa-search "></span>
+                    </div>
+                  </td>
+                  <td style="min-width: 126px !important;">
+                    <div class="form-group has-feedback">
+                      <input type="text" class="form-control" [(ngModel)]="serchClaimDocNo">
+                      <span style="position:absolute; right:8px;top:8px;color: #0555AB;" class="fa fa-search "></span>
+                    </div>
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+              <tbody>
+                <tr *ngFor="let Doc of lstClaimViewBindGrid | filter:{varCFACode : serchCFACode,varCFAName : serchCFAName,varReferenceID : serchReferenceID,varStockistCode : serchStockistCode,varStockistName : serchStockistName ,varClaimDocNo : serchClaimDocNo} : true; let i=index ;">
+                  <td class="cfa-update"><p><a href="javascript:void(0)" (click)="UpdateData(Doc.varReferenceID)">Update</a></p></td>
+
+                  <!--<td> {{Doc.varCFACode}}</td>-->
+                  <td> {{Doc.varCFAName}}</td>
+                  <td> {{Doc.varReferenceID}}</td>
+                  <td> {{Doc.varStockistCode}}</td>
+                  <td> {{Doc.varStockistName}}</td>
+                  <td style="width:20%"> {{Doc.varClaimDocNo}}</td>
+                  <td style="min-width: 110px!important;"> {{Doc.varClaimDate}}</td>
+                  <td> {{Doc.varStockistRefNo}}</td>
+                  <td> {{Doc.varClaimStatus}}</td>
+                  <td> {{Doc.varFileUploadStatus}}</td>
+                  <td style="min-width: 110px!important;"> {{Doc.varLatestUpdatedOn}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
+<ng4-loading-spinner> </ng4-loading-spinner>
