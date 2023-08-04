@@ -36,6 +36,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NotificationComponent } from './notification/notification.component';
 import { SwipeToDeleteItemComponent } from './swipe-to-delete-item/swipe-to-delete-item.component';
+import { SwipeAngularListModule } from 'swipe-angular-list';
  
 
 @NgModule({
@@ -50,7 +51,7 @@ import { SwipeToDeleteItemComponent } from './swipe-to-delete-item/swipe-to-dele
     DxDateBoxModule,
     DxTreeViewModule,
     DxPopupModule, DxButtonModule, DxTemplateModule, DxCheckBoxModule, DxChartModule, DxLoadIndicatorModule,
-    Ng4LoadingSpinnerModule, MatCardModule, MatProgressSpinnerModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatSelectModule
+    Ng4LoadingSpinnerModule, MatCardModule, MatProgressSpinnerModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule, MatSelectModule, SwipeAngularListModule 
   ],
   declarations: [
     AppComponent,

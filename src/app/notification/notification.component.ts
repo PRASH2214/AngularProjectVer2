@@ -8,67 +8,68 @@ export interface ListItem {
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css'],
-  encapsulation:ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None
 })
 export class NotificationComponent implements OnInit {
+  isButtonVisible = false;
   constructor() { }
   notification = [
     {
-      name: 'Item 1', isVisible: false, items: [
+      id: 1, name: 'Item 1', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '01-July-2023', ach: '89%', read: false
     },
     {
-      name: 'Item 2', isVisible: false, items: [
+      id: 2, name: 'Item 2', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '02-July-2023', ach: '89%', read: true
     },
     {
-      name: 'Item 3', isVisible: false, items: [
+      id: 3, name: 'Item 3', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '03-July-2023', ach: '89%', read: false
     },
     {
-      name: 'Item 4', isVisible: false, items: [
+      id: 4, name: 'Item 4', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '04-July-2023', ach: '89%', read: false
     },
     {
-      name: 'Item 5', isVisible: false, items: [
+      id: 5, name: 'Item 5', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '05-July-2023', ach: '89%', read: false
     },
     {
-      name: 'Item 6', isVisible: false, items: [
+      id: 6, name: 'Item 6', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '06-July-2023', ach: '89%', read: false
     },
     {
-      name: 'Item 7', isVisible: false, items: [
+      id: 7, name: 'Item 7', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '07-July-2023', ach: '89%', read: false
     },
     {
-      name: 'Item 8', isVisible: false, items: [
+      id: 8, name: 'Item 8', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '02-July-2023', ach: '89%', read: false
     },
     {
-      name: 'Item 9', isVisible: false, items: [
+      id: 9, name: 'Item 9', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '02-July-2023', ach: '89%', read: false
     },
     {
-      name: 'Item 10', isVisible: false, items: [
+      id: 10, name: 'Item 10', isVisible: false, items: [
         { hq: 'Ahmedabad', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' },
         { hq: 'Baroda', varMonth1: '90%', varMonth2: '100%', varMonth3: '95%' }
       ], varDate: '02-July-2023', ach: '89%', read: false
@@ -81,7 +82,20 @@ export class NotificationComponent implements OnInit {
     { text: 'Item 4' },
     // Add more items as needed
   ];
-  
+
+  action = (a) => {
+    console.log(a);
+    alert(1);
+  };
+
+  clickOnItem = (a) => {
+    console.log('Click on item');
+    
+  }
+
+  swipeCallback = (a) => {
+    console.log('Callback Swipe', a);
+  }
   ngOnInit() {
   }
   toggleVisibility(item): void {
